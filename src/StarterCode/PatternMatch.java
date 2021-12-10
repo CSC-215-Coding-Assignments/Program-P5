@@ -2,7 +2,7 @@ package StarterCode;
 /**************
  * PatterMatch
  * Author: Christian Duncan
- * Modified by: ...
+ * Modified by: Emily Balboni
  *
  * Reads in two patterns (nxm array of integers) and
  * returns how many times the second pattern is found inside the first pattern.
@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class PatternMatch {
-    public static final String DEFAULT_FILE = "IO/test0.input";
+    public static final String DEFAULT_FILE = "resources/IO/test3.input";
     public static void main(String[] args) {
         String file = DEFAULT_FILE;
         if (args.length > 0) {
@@ -42,9 +42,30 @@ public class PatternMatch {
 
     /**
      * Count how many times pattern b shows up inside pattern a
+     * does this by checking every value in a [][] to see if the values in b [][] are a match
+     * if there is a match numCheck keeps track, if the amount of matches is equal to the amount of
+     * numbers in b[][] then the match count variable increases and the numCheck resets to zero to start the next comparison
      **/
     public static int countMatches(int[][] a, int[][] b) {
-        return 0;
+        int count = 0;
+        int numCheck = 0;
+        for(int n =0; n < a.length - b.length + 1;n++){
+            for(int k = 0; k < a[n].length - b[0].length + 1; k++){
+                    numCheck = 0;
+                for(int i = 0; i < b.length; i++){
+                    for(int j =0; j <b[0].length; j++){
+                        if(a[n + i][k + j] == b [i][j]){
+                            numCheck ++;
+                        }
+                    }
+                }
+                if(numCheck == b.length * b[0].length){
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
             
     /**
